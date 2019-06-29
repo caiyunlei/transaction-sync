@@ -23,11 +23,7 @@ public class MarketController {
     @RequestMapping(path = "/v0/perchase", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class)
     public String perchaseOne() throws Exception {
-        Commodity commodity = commodityRepository.findById(commodityId);
-        int stock = commodity.getStock();
-        int stockAfterPurshase = stock - perchaseAmount;
-        commodity.setStock(stockAfterPurshase);
-        commodityRepository.save(commodity);
+        doPerchase();
         return "ok!";
     }
 
@@ -36,11 +32,7 @@ public class MarketController {
     @Transactional(rollbackFor = Exception.class)
     public String perchaseOneSyncInnerTransactional() throws Exception {
         synchronized (lock) {
-            Commodity commodity = commodityRepository.findById(commodityId);
-            int stock = commodity.getStock();
-            int stockAfterPurshase = stock - perchaseAmount;
-            commodity.setStock(stockAfterPurshase);
-            commodityRepository.save(commodity);
+            doPerchase();
         }
         return "ok!";
     }
@@ -49,11 +41,7 @@ public class MarketController {
     @RequestMapping(path = "/v2/perchase", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class,isolation = Isolation.REPEATABLE_READ)
     public String perchaseOneRepeatableRead() throws Exception {
-        Commodity commodity = commodityRepository.findById(commodityId);
-        int stock = commodity.getStock();
-        int stockAfterPurshase = stock - perchaseAmount;
-        commodity.setStock(stockAfterPurshase);
-        commodityRepository.save(commodity);
+        doPerchase();
         return "ok!";
     }
 
@@ -61,23 +49,23 @@ public class MarketController {
     @RequestMapping(path = "/v3/perchase", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class,isolation = Isolation.SERIALIZABLE)
     public String perchaseOneSerializableIsolation() throws Exception {
+        doPerchase();
+        return "ok!";
+    }
+
+    private void doPerchase() {
         Commodity commodity = commodityRepository.findById(commodityId);
         int stock = commodity.getStock();
         int stockAfterPurshase = stock - perchaseAmount;
         commodity.setStock(stockAfterPurshase);
         commodityRepository.save(commodity);
-        return "ok!";
     }
 
     @ResponseBody
     @RequestMapping(path = "/v4/perchase", method = RequestMethod.POST)
     public String perchaseOneOnlyUseSync() throws Exception {
         synchronized (lock) {
-            Commodity commodity = commodityRepository.findById(commodityId);
-            int stock = commodity.getStock();
-            int stockAfterPurshase = stock - perchaseAmount;
-            commodity.setStock(stockAfterPurshase);
-            commodityRepository.save(commodity);
+            doPerchase();
         }
         return "ok!";
     }
@@ -93,10 +81,6 @@ public class MarketController {
 
     @Transactional(rollbackFor = Exception.class)
     protected void perchaseByTransaction() {
-        Commodity commodity = commodityRepository.findById(commodityId);
-        int stock = commodity.getStock();
-        int stockAfterPurshase = stock - perchaseAmount;
-        commodity.setStock(stockAfterPurshase);
-        commodityRepository.save(commodity);
+        doPerchase();
     }
 }
