@@ -1,6 +1,6 @@
-package com.cyl.tw.service;
+package com.cyl.transaction.service;
 
-import com.cyl.tw.entity.Commodity;
+import com.cyl.transaction.entity.Commodity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

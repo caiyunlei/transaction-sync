@@ -1,4 +1,4 @@
-package com.cyl.tw.entity;
+package com.cyl.transaction.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

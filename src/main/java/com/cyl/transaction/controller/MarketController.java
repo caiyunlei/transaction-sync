@@ -1,7 +1,7 @@
-package com.cyl.tw.controller;
+package com.cyl.transaction.controller;
 
-import com.cyl.tw.entity.Commodity;
-import com.cyl.tw.service.CommodityRepository;
+import com.cyl.transaction.entity.Commodity;
+import com.cyl.transaction.service.CommodityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
