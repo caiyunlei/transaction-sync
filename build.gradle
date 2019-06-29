@@ -1,0 +1,37 @@
+plugins{
+    id 'org.springframework.boot' version '1.5.19.RELEASE'
+    id 'java'
+}
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.19.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'1.5.19.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '1.5.19.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version:'1.5.19.RELEASE'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.7'
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.4'
+    compile group: 'com.alibaba', name: 'fastjson', version:'1.2.15'
+    compile group: 'com.alibaba', name: 'druid', version:'1.0.29'
+    compile group: 'org.apache.axis', name: 'axis', version:'1.4'
+    compile group: 'com.oracle', name: 'ojdbc6', version:'11.2.0.3'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.10'
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.6'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.16'
+
+}
+
+

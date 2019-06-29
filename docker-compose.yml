@@ -1,0 +1,16 @@
+version: '2'
+services:
+  postgresql:
+    image: postgres:10-alpine
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_PASSWORD=88888888
+
+  mysql:
+    ports:
+      - "3306:3306"
+    image: "mysql:latest"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=88888888

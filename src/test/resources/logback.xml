@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--不添加导致输出debug日志-->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    <logger name="*" level="warn" />
+</configuration>
