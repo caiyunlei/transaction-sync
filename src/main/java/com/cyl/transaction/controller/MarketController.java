@@ -13,74 +13,74 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MarketController {
     private final int commodityId = 0;
-    private final int perchaseAmount = 1;
+    private final int purchaseAmount = 1;
     private final Object lock = new Object();
 
     @Autowired
     private CommodityRepository commodityRepository;
 
     @ResponseBody
-    @RequestMapping(path = "/v0/perchase", method = RequestMethod.POST)
+    @RequestMapping(path = "/v0/purchase", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class)
-    public String perchaseOne() throws Exception {
-        doPerchase();
+    public String purchaseOne() throws Exception {
+        doPurchase();
         return "ok!";
     }
 
     @ResponseBody
-    @RequestMapping(path = "/v1/perchase", method = RequestMethod.POST)
+    @RequestMapping(path = "/v1/purchase", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class)
-    public String perchaseOneSyncInnerTransactional() throws Exception {
+    public String purchaseOneSyncInnerTransactional() throws Exception {
         synchronized (lock) {
-            doPerchase();
+            doPurchase();
         }
         return "ok!";
     }
 
     @ResponseBody
-    @RequestMapping(path = "/v2/perchase", method = RequestMethod.POST)
+    @RequestMapping(path = "/v2/purchase", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class,isolation = Isolation.REPEATABLE_READ)
-    public String perchaseOneRepeatableRead() throws Exception {
-        doPerchase();
+    public String purchaseOneRepeatableRead() throws Exception {
+        doPurchase();
         return "ok!";
     }
 
     @ResponseBody
-    @RequestMapping(path = "/v3/perchase", method = RequestMethod.POST)
+    @RequestMapping(path = "/v3/purchase", method = RequestMethod.POST)
     @Transactional(rollbackFor = Exception.class,isolation = Isolation.SERIALIZABLE)
-    public String perchaseOneSerializableIsolation() throws Exception {
-        doPerchase();
+    public String purchaseOneSerializableIsolation() throws Exception {
+        doPurchase();
         return "ok!";
     }
 
-    private void doPerchase() {
+    private void doPurchase() {
         Commodity commodity = commodityRepository.findById(commodityId);
         int stock = commodity.getStock();
-        int stockAfterPurshase = stock - perchaseAmount;
+        int stockAfterPurshase = stock - purchaseAmount;
         commodity.setStock(stockAfterPurshase);
         commodityRepository.save(commodity);
     }
 
     @ResponseBody
-    @RequestMapping(path = "/v4/perchase", method = RequestMethod.POST)
-    public String perchaseOneOnlyUseSync() throws Exception {
+    @RequestMapping(path = "/v4/purchase", method = RequestMethod.POST)
+    public String purchaseOneOnlyUseSync() throws Exception {
         synchronized (lock) {
-            doPerchase();
+            doPurchase();
         }
         return "ok!";
     }
 
     @ResponseBody
-    @RequestMapping(path = "/v5/perchase", method = RequestMethod.POST)
-    public String perchaseOneSyncOuterTransactional() throws Exception {
+    @RequestMapping(path = "/v5/purchase", method = RequestMethod.POST)
+    public String purchaseOneSyncOuterTransactional() throws Exception {
         synchronized (lock) {
-            perchaseByTransaction();
+            purchaseByTransaction();
         }
         return "ok!";
     }
 
     @Transactional(rollbackFor = Exception.class)
-    protected void perchaseByTransaction() {
-        doPerchase();
+    protected void purchaseByTransaction() {
+        doPurchase();
     }
 }
