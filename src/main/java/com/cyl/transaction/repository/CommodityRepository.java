@@ -1,4 +1,4 @@
-package com.cyl.transaction.service;
+package com.cyl.transaction.repository;
 
 import com.cyl.transaction.entity.Commodity;
 import org.springframework.data.jpa.repository.JpaRepository;
