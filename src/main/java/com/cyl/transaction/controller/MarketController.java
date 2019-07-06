@@ -95,6 +95,6 @@ public class MarketController {
         int stockAfterPurshase = stock - purchaseAmount;
         commodity.setStock(stockAfterPurshase);
         commodityRepository.save(commodity);
-        throw new RuntimeException();
+//        throw new RuntimeException();
     }
 }
