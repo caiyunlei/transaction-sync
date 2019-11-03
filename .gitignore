@@ -9,9 +9,6 @@ build/
 upload/
 /.mvn
 
-gradlew
-
-
 ### STS ###
 .apt_generated
 .classpath
